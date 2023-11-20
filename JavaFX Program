@@ -1,0 +1,42 @@
+import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.scene.layout.Pane;
+import javafx.scene.shape.Circle;
+import javafx.stage.Stage;
+
+public class CircleStyling extends Application {
+
+    @Override
+    public void start(Stage primaryStage) {
+        Pane root = new Pane();
+
+        // Create circles with different styles based on classes and IDs defined in CSS
+        Circle plainCircle = new Circle(50, 50, 40);
+        plainCircle.getStyleClass().add("plaincircle");
+
+        Circle circleWithBorder = new Circle(150, 50, 40);
+        circleWithBorder.getStyleClass().addAll("plaincircle", "circleborder");
+
+        Circle circleWithBoth = new Circle(250, 50, 40);
+        circleWithBoth.getStyleClass().addAll("plaincircle", "border");
+        circleWithBoth.setId("redcircle");
+
+        Circle greenCircle = new Circle(350, 50, 40);
+        greenCircle.setId("greencircle");
+
+        root.getChildren().addAll(plainCircle, circleWithBorder, circleWithBoth, greenCircle);
+
+        // Load the CSS file
+        String cssFile = getClass().getResource("mystyle.css").toExternalForm();
+        root.getStylesheets().add(cssFile);
+
+        Scene scene = new Scene(root, 450, 150);
+        primaryStage.setScene(scene);
+        primaryStage.setTitle("Styled Circles");
+        primaryStage.show();
+    }
+
+    public static void main(String[] args) {
+        launch(args);
+    }
+}
